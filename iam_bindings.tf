@@ -438,3 +438,66 @@ resource "google_secret_manager_secret_iam_member" "identity_svc_okta_secret" {
 
   depends_on = [google_service_account.app]
 }
+
+resource "google_project_iam_audit_config" "bigquery_data_access_audit" {
+  project = var.prod_project_id
+  service = "bigquery.googleapis.com"
+
+  audit_log_config {
+    log_type = "ADMIN_READ"
+  }
+  audit_log_config {
+    log_type = "DATA_READ"
+  }
+  audit_log_config {
+    log_type = "DATA_WRITE"
+  }
+}
+resource "google_project_iam_audit_config" "phi_data_access_audit_config" {
+  project = var.prod_project_id
+  service = "allServices"
+
+  audit_log_config {
+    log_type = "ADMIN_READ"
+  }
+
+  audit_log_config {
+    log_type = "DATA_READ"
+  }
+
+  audit_log_config {
+    log_type = "DATA_WRITE"
+  }
+}
+resource "google_project_iam_audit_config" "phi_data_access_audit_logs" {
+  project = var.prod_project_id
+  service = "allServices"
+
+  audit_log_config {
+    log_type = "ADMIN_READ"
+  }
+
+  audit_log_config {
+    log_type = "DATA_READ"
+  }
+
+  audit_log_config {
+    log_type = "DATA_WRITE"
+  }
+}
+resource "google_project_iam_audit_config" "pubsub_data_access_audit" {
+  project = var.prod_project_id
+  service = "pubsub.googleapis.com"
+
+  audit_log_config {
+    log_type = "ADMIN_READ"
+  }
+
+  audit_log_config {
+    log_type = "DATA_READ"
+  }
+
+  audit_log_config {
+    log_type = "DATA_WRITE"
+  }
+}
