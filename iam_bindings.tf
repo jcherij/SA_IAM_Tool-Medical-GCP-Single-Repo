@@ -266,6 +266,7 @@ resource "google_pubsub_topic_iam_member" "referral_mgmt_fhir_publisher" {
   topic   = var.phi_pubsub_topics["fhir_events"]
   role    = "roles/pubsub.publisher"
   member  = "serviceAccount:referral-mgmt-prod-svc@${var.prod_project_id}.iam.gserviceaccount.com"
+  dataset_id = "analytics_internal"
 
   depends_on = [google_service_account.app]
 }
