@@ -223,7 +223,7 @@ resource "google_project_iam_member" "ehr_core_bq_job_user" {
 
 resource "google_bigquery_dataset_iam_member" "analytics_platform_bq_viewer" {
   project    = var.prod_project_id
-  dataset_id = var.phi_bigquery_datasets["clinical"]
+  dataset_id = "analytics_internal"
   role       = "roles/bigquery.dataViewer"
   member     = "serviceAccount:analytics-platform-prod-svc@${var.prod_project_id}.iam.gserviceaccount.com"
 
