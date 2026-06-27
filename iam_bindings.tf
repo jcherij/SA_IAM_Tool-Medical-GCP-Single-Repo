@@ -292,13 +292,6 @@ resource "google_pubsub_topic_iam_member" "ehr_core_adt_publisher" {
 # NON-PHI APPLICATIONS — GCS access (bucket-level)
 ##############################################################################
 
-resource "google_storage_bucket_iam_member" "analytics_platform_gcs_reader" {
-  bucket = var.internal_gcs_buckets["analytics_staging"]
-  role   = "roles/storage.objectViewer"
-  member = "serviceAccount:analytics-platform-prod-svc@${var.prod_project_id}.iam.gserviceaccount.com"
-
-  depends_on = [google_service_account.app]
-}
 
 resource "google_storage_bucket_iam_member" "reporting_svc_gcs_writer" {
   bucket = var.internal_gcs_buckets["reporting_output"]
