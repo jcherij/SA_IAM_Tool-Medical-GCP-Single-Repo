@@ -28,6 +28,7 @@ resource "google_project_iam_member" "logging" {
   project = each.value.env == "prod" ? var.prod_project_id : var.nonprod_project_id
   role    = "roles/logging.logWriter"
   member  = "serviceAccount:${each.key}-${each.value.env}-svc@${each.value.env == "prod" ? var.prod_project_id : var.nonprod_project_id}.iam.gserviceaccount.com"
+  depends_on = [google_service_account.app]
 }
 
 resource "google_project_iam_member" "monitoring" {
